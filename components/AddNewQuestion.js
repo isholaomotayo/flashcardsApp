@@ -22,19 +22,17 @@ export class AddNewQuestion extends React.Component {
       <KeyboardAvoidingView behavior="padding" style={styles.container} keyboardVerticalOffset={5}>
         <MaterialCommunityIcons name='calendar-question' size={60} color={tintColor}/>
         <TextInput
-          style={{height: 40, width: 280, borderColor: tintColor}}
+          style={styles.input}
           onChangeText={(question) => this.setState({question})}
           placeholder='Enter question ?  '
           value={question}
         />
         <TextInput
-          style={{height: 40, width: 280, borderColor: tintColor}}
+          style={styles.input}
           onChangeText={(answer) => this.setState({answer})}
           placeholder='Enter answer ?  '
           value={answer}
-
         />
-
         <TouchableOpacity
           style={styles.button}
           onPress={() => { const _question = { question, answer };  const _deckKey = deckName.replace(/\s+/g, '')

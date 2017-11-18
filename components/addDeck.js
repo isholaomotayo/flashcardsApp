@@ -1,13 +1,13 @@
-
 import React from 'react';
 import {
   Text,
   TextInput,
   KeyboardAvoidingView,
   TouchableOpacity,
+  View
 } from 'react-native';
-import { MaterialCommunityIcons, MaterialIcons} from '@expo/vector-icons'
-import { blue, tintColor, styles } from "../styles"
+import {MaterialCommunityIcons, MaterialIcons} from '@expo/vector-icons'
+import {blue, tintColor, styles} from "../styles"
 
 export class AddADeck extends React.Component {
   state = {
@@ -23,13 +23,13 @@ export class AddADeck extends React.Component {
         <Text style={styles.heading}>
           {deckName}
         </Text>
-
-        <TextInput
-          style={{height: 40, width: 280, borderColor: tintColor}}
-          onChangeText={(deckName) => this.setState({deckName})}
-          placeholder='Enter Deck Name  '
-          value={deckName}
-        />
+          <TextInput
+            style={ styles.input}
+            onChangeText={(deckName) => this.setState({deckName})}
+            placeholder='Enter Deck Name  '
+            value={deckName}
+            underlineColorAndroid='transparent'
+          />
 
         <TouchableOpacity
           style={styles.button}
