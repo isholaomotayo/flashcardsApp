@@ -51,7 +51,7 @@ export default class App extends React.Component {
 
     AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY).then((value) => {
       if (value === null) {
-        AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(decksLocal));
+        AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(decksLocal)); // load starter deck
       }
       this.setState({allDecks: JSON.parse(value)})
       Animated.timing(this.state.opacity, {toValue: 1, duration: 500}).start()

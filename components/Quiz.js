@@ -4,6 +4,7 @@ import {
   View,
   Animated,
   TouchableOpacity,
+  Alert
 } from 'react-native';
 import {MaterialCommunityIcons, MaterialIcons,FontAwesome } from '@expo/vector-icons'
 import {blue, tintColor, styles} from "../styles"
@@ -15,12 +16,21 @@ export class Quiz extends React.Component {
     opacity: new Animated.Value(0),
     scale: new Animated.Value(1),
     right:0,
-    wrong:0
+    wrong:0,
+    activeQuiz:[],
+
   }
 
+  static navigationOptions =  ({ navigation }) => ({
+    headerTitle: `${navigation.state.params.deckName} Quiz` })
+
   componentDidMount() {
-  clearNotification()
-    .then( setNotification)
+    const  { deckName } = this.props.navigation.state.params
+    const deckKey = deckName.replace(/\s+/g, '')
+
+
+        clearNotification().then( setNotification)
+
     const {scale} = this.state
     Animated.timing(this.state.opacity, {toValue: 1, duration: 2500}).start()
     Animated.sequence([
@@ -28,44 +38,75 @@ export class Quiz extends React.Component {
       Animated.spring(scale, {toValue: 1, friction: 8, tension:80 })
     ]).start()
 
-    setNotification()
+
+    this.setState({ activeQuiz: this.props.screenProps['decks'][[deckKey]]['questions']})
+
   }
 
 
   render() {
     const {navigation, screenProps} = this.props
-    const {scale} = this.state
+    const {scale , right, wrong, activeQuiz} = this.state
+    const  { deckName } = navigation.state.params
+    const deckKey = deckName.replace(/\s+/g, '')
+
+const correct =() => {
+  this.setState({ activeQuiz : activeQuiz.slice(1) }) , this.setState({ right : this.state.right + 1 })
+}
+const incorrect =() => {
+  this.setState({ activeQuiz : activeQuiz.slice(1) }) , this.setState({ wrong : this.state.right + 1 })
+}
+
     return (
       <Animated.View style={[styles.container, {transform: [{scale}]}]}>
+
         <View style={styles.container}>
           <FontAwesome name='question-circle-o' size={40} color={tintColor}/>
-          <Text style={styles.heading}> Questions </Text>
-          <Text> Remaining Questions</Text>
+          <Text style={styles.heading}>{ deckName} Questions </Text>
+          <Text style={{ fontSize : 17 , color: '#f3000f'}}> {activeQuiz.length > 0 ? ` ${activeQuiz.length} Questions Remaining ` :  ` Results`}</Text>
+          { activeQuiz.length === 0 &&
+          <View  >
+            <Text style={{ fontSize : 19 , color: '#000000', textAlign:'center'}}> You  Scored { (right / (right+wrong)) *100 } %</Text>
+            <Text style={{ fontSize : 19 , color: '#f3003f' , textAlign:'center'}}>{wrong} answers were wrong</Text>
+            <Text style={{ fontSize : 19 , color: '#000000', textAlign:'center'}}> and</Text>
+            <Text style={{ fontSize : 19 , color: '#f3003f' , textAlign:'center'}}> {right} answers were right</Text>
+          </View>}
 
 
-          <Text> {JSON.stringify( screenProps['decks'][[this.props.navigation.state.params.deckName]])} </Text>
-
-
+          <Text style={{  fontSize: 20, margin:10 }}> {activeQuiz[0] && activeQuiz[0].question} </Text>
+          {activeQuiz.length > 0 &&
           <TouchableOpacity
             style={[styles.button,]}
-            onPress={() => navigation.navigate('DeckList', {user: ' No User '})}
+            onPress={() => {
+              Alert.alert(
+                `Question :  ${activeQuiz[0] && activeQuiz[0].question}`,
+                `Answer :   ${activeQuiz[0] && activeQuiz[0].question} `,
+                [
+                  {text: 'Mark Correct', onPress: () => correct()},
+                  {text: 'Mark Incorrect', onPress: () => incorrect()},
+                  {text: 'OK',},
+                ],
+                {cancelable: false}
+              )
+            }}
           >
             <Text style={styles.buttonText}> Show answer </Text>
           </TouchableOpacity>
-
+          }
+          {activeQuiz.length > 0 &&
           <View style={{ display: 'flex', justifyContent: 'center', flexDirection: 'row'}}>
             <TouchableOpacity
               style={[styles.smallButton,{ height: 40, margin:10  }]}
-              onPress={() => navigation.navigate('AddNewQuestion', {user: ' No User '})}>
+              onPress={() => correct()}>
+
               <Text style={styles.buttonText}> Correct </Text>
             </TouchableOpacity>
-
             <TouchableOpacity
               style={[styles.smallButton, {height: 40, margin:10 , backgroundColor: '#870000'}]}
-              onPress={() => navigation.navigate('AddNewQuestion', {user: ' No User '})}>
+              onPress={() => incorrect()}>
               <Text style={styles.buttonText}> Incorrect </Text>
             </TouchableOpacity>
-          </View>
+          </View> }
         </View>
       </Animated.View>
     )
