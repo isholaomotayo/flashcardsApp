@@ -7,6 +7,8 @@ import {
 } from 'react-native';
 import {MaterialCommunityIcons, MaterialIcons,FontAwesome } from '@expo/vector-icons'
 import {blue, tintColor, styles} from "../styles"
+import { clearNotification, setNotification } from "./notifications"
+
 
 
 export class Quiz extends React.Component {
@@ -17,14 +19,16 @@ export class Quiz extends React.Component {
   }
 
   componentDidMount() {
-
+  clearNotification()
+    .then( setNotification)
     const {scale} = this.state
     Animated.timing(this.state.opacity, {toValue: 1, duration: 2500}).start()
     Animated.sequence([
-      Animated.timing(scale, {duration: 200, toValue: 1.04}),
-      Animated.spring(scale, {toValue: 1, friction: 4})
+      Animated.timing(scale, {duration: 200, toValue: 1.01}),
+      Animated.spring(scale, {toValue: 1, friction: 8, tension:80 })
     ]).start()
 
+    setNotification()
   }
 
 

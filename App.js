@@ -17,6 +17,7 @@ import  { SingleDeck }from './components/singleDeck'
 import { Decks } from './components/Decks'
 import { AddNewQuestion } from './components/AddNewQuestion'
 import  { Quiz } from './components/Quiz'
+import { setNotification} from "./components/notifications"
 
 const FLASHCARDS_STORAGE_KEY = 'FLASHCARDS_STORAGE:key'
 
@@ -46,6 +47,8 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    setNotification()
+
     AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY).then((value) => {
       if (value === null) {
         AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(decksLocal));
