@@ -26,8 +26,10 @@ export class AddNewQuestion extends React.Component {
           onChangeText={(question) => this.setState({question})}
           placeholder='Enter question ?  '
           value={question}
+          underlineColorAndroid='transparent'
         />
         <TextInput
+          underlineColorAndroid='transparent'
           style={styles.input}
           onChangeText={(answer) => this.setState({answer})}
           placeholder='Enter answer ?  '
