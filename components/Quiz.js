@@ -82,11 +82,11 @@ const incorrect =() => {
                 `Question :  ${activeQuiz[0] && activeQuiz[0].question}`,
                 `Answer :   ${activeQuiz[0] && activeQuiz[0].question} `,
                 [
-                  {text: 'Mark Correct', onPress: () => correct()},
-                  {text: 'Mark Incorrect', onPress: () => incorrect()},
-                  {text: 'OK',},
+                  {text: 'Correct', onPress: () => correct()},
+                  {text: 'Incorrect', onPress: () => incorrect()},
+                  {text: 'OK', },
                 ],
-                {cancelable: false}
+                {cancelable: true}
               )
             }}
           >
