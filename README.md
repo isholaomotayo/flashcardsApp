@@ -1,4 +1,4 @@
-[![forthebadge](http://forthebadge.com/images/badges/built-by-crips.svg)](http://forthebadge.com)
+[![forthebadge](http://forthebadge.com/images/badges/built-by-developers.svg)](http://forthebadge.com)
 [![forthebadge](http://forthebadge.com/images/badges/built-for-android.svg)](http://forthebadge.com)
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 

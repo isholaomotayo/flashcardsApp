@@ -9,13 +9,13 @@ import {MaterialCommunityIcons, MaterialIcons,FontAwesome } from '@expo/vector-i
 import {blue, tintColor, styles} from "../styles"
 import { clearNotification, setNotification } from "./notifications"
 
-
-
 export class Quiz extends React.Component {
 
   state = {
     opacity: new Animated.Value(0),
-    scale: new Animated.Value(1)
+    scale: new Animated.Value(1),
+    right:0,
+    wrong:0
   }
 
   componentDidMount() {
@@ -41,6 +41,8 @@ export class Quiz extends React.Component {
           <FontAwesome name='question-circle-o' size={40} color={tintColor}/>
           <Text style={styles.heading}> Questions </Text>
           <Text> Remaining Questions</Text>
+
+
           <Text> {JSON.stringify( screenProps['decks'][[this.props.navigation.state.params.deckName]])} </Text>
 
 

@@ -6,10 +6,11 @@ const NOTIFICATION_KEY = 'FLASHCARD_NOTIFICATION:key'
 
 export const createNotification = () => (
   { title: 'You have not studied today',
-    body: ' Dont forget to study today !',
+    body: '📖 Don\'t forget to study today 🎓!',
     ios:{     sound: true   },
     android: { sound: true, priority: 'high', sticky: false, vibrate: true  }
   })
+
 
 export const setNotification = () => (
   AsyncStorage.getItem(NOTIFICATION_KEY)
@@ -19,7 +20,7 @@ export const setNotification = () => (
         .then(({status}) => { if (status === 'granted') {
           Notifications.cancelAllScheduledNotificationsAsync()
           let tomorrow = new Date()
-          tomorrow.setDate(tomorrow.getDate() )
+          tomorrow.setDate(tomorrow.getDate() + 1 )
           tomorrow.setHours( 16)
           tomorrow.setMinutes(0)
 
