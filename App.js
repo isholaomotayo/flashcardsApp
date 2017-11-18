@@ -11,7 +11,7 @@ import {
   StatusBar,
   FlatList,
   Alert,
-  Button
+  Animated
 } from 'react-native';
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
@@ -26,62 +26,96 @@ const FLASHCARDS_STORAGE_KEY = 'FLASHCARDS_STORAGE:key'
 const blue = '#2b8bb8'
 const tintColor = '#1955e8'
 
-const SingleDeck = ({navigation, screenProps}) => (
-  <View style={styles.container}>
-    <View style={styles.container}>
-      { console.log(screenProps.decks)}
-      <MaterialCommunityIcons name='cards-outline' size={130} color={tintColor}/>
-      <Text style={styles.heading}>  {navigation.state.params.aDeck.title} </Text>
-      <Text> {navigation.state.params.aDeck.questions && navigation.state.params.aDeck.questions.length} Cards </Text>
+class SingleDeck extends React.Component {
 
+  state = {
+    opacity: new Animated.Value(0),
+    scale: new Animated.Value(1)
+  }
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('DeckList', {user: ' No User '})}>
-        <Text style={styles.buttonText}> <MaterialCommunityIcons name='clock-start' size={20} color='#ffffff'/> Start
-          Quiz </Text>
-      </TouchableOpacity>
+  componentDidMount() {
 
+    const { scale } = this.state
+    Animated.timing(this.state.opacity, {toValue: 1, duration: 2500}).start()
+    Animated.sequence([
+                Animated.timing(scale, { duration: 200, toValue: 1.04}),
+                Animated.spring(scale, { toValue: 1, friction: 4})
+              ]).start()
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => screenProps.addNewCard()}>
-        <Text style={styles.buttonText}> <MaterialIcons name='library-add' size={20} color='#ffffff'/> Add questions to
-          deck </Text>
-      </TouchableOpacity>
-    </View>
-  </View>
-);
-
-
-class  AddADeck extends React.Component {
-  state= {
-    deckName:""
   }
 
 
-  render(){
-    const { navigation , screenProps } = this.props
-    const { deckName } =this.state
-        return(
-      <KeyboardAvoidingView behavior="padding" style={styles.container} keyboardVerticalOffset={50} >
+  render() {
+    const {navigation, screenProps} = this.props
+    const { scale } = this.state
+    return (
+      <Animated.View style={[styles.container, {transform: [{scale}]}]}>
+        <View style={styles.container}>
+          <MaterialCommunityIcons name='cards-outline' size={130} color={tintColor}/>
+          <Text style={styles.heading}>  {navigation.state.params.aDeck.title} </Text>
+          <Text> {navigation.state.params.aDeck.questions && navigation.state.params.aDeck.questions.length}
+            Cards </Text>
+
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('DeckList', {user: ' No User '})}>
+            <Text style={styles.buttonText}> <MaterialCommunityIcons name='clock-start' size={20} color='#ffffff'/>
+              Start
+              Quiz </Text>
+          </TouchableOpacity>
+
+
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => screenProps.addNewCard()}>
+            <Text style={styles.buttonText}> <MaterialIcons name='library-add' size={20} color='#ffffff'/> Add questions
+              to
+              deck </Text>
+          </TouchableOpacity>
+        </View>
+      </Animated.View>
+    )
+  }
+
+}
+
+
+class AddADeck extends React.Component {
+  state = {
+    deckName: ""
+  }
+
+
+  render() {
+    const {navigation, screenProps} = this.props
+    const {deckName} = this.state
+    return (
+      <KeyboardAvoidingView behavior="padding" style={styles.container} keyboardVerticalOffset={50}>
         <MaterialCommunityIcons name='cards-outline' size={130} color={tintColor}/>
-        <Text style={styles.heading} >
+        <Text style={styles.heading}>
           {deckName}
         </Text>
 
 
         <TextInput
           style={{height: 40, width: 280, borderColor: tintColor}}
-          onChangeText={( deckName ) => this.setState({deckName})}
+          onChangeText={(deckName) => this.setState({deckName})}
           placeholder='Enter Deck Name  '
           value={deckName}
         />
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => { screenProps.addNewDeck( deckName), this.setState({ deckName : ''}), navigation.navigate('SingleDeck', {aDeck : {title: deckName, questions: []}})} }>
-          <Text style={styles.buttonText}> <MaterialIcons name='library-add' size={20} color='#ffffff'/> Add deck </Text>
+          onPress={() => {
+            screenProps.addNewDeck(deckName), this.setState({deckName: ''}), navigation.navigate('SingleDeck', {
+              aDeck: {
+                title: deckName,
+                questions: []
+              }
+            })
+          }}>
+          <Text style={styles.buttonText}> <MaterialIcons name='library-add' size={20} color='#ffffff'/> Add deck
+          </Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     )
@@ -119,14 +153,15 @@ class Decks extends React.Component {
 export default class App extends React.Component {
 
   state = {
-    allDecks: {}
+    allDecks: {},
+    opacity: new Animated.Value(0)
   }
 
-
-  addNewDeck = ( deckName ) => {
+  addNewDeck = (deckName) => {
     const _deck = {[deckName.replace(/\s+/g, '')]: {title: deckName, questions: []}, ...this.state.allDecks}
     this.setState({allDecks: _deck}),
-    AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(_deck))  }
+      AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(_deck))
+  }
 
   addNewCard = () => {
     const _card = {
@@ -142,22 +177,23 @@ export default class App extends React.Component {
     this.setState({allDecks: _card}), AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(_card))
   }
 
-
   componentDidMount() {
     AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY).then((value) => {
       // if (value === null) {
       //   AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(decksLocal));
       // }
       this.setState({allDecks: JSON.parse(value)})
+      Animated.timing(this.state.opacity, {toValue: 1, duration: 500}).start()
     })
   }
+
   render() {
     return (
       //<Provider store={createStore(reducer)}>
-      <View style={{flex: 1}}>
+      <Animated.View style={{flex: 1, opacity: this.state.opacity}}>
         <FlashStatusBar backgroundColor={blue} barStyle="light-content"/>
         <Stack screenProps={{decks: this.state.allDecks, addNewDeck: this.addNewDeck, addNewCard: this.addNewCard}}/>
-      </View>
+      </Animated.View>
       // </Provider>
     );
   }
