@@ -51,8 +51,8 @@ export default class App extends React.Component {
 
     AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY).then((value) => {
       if (value === null) {
-        AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(decksLocal)); // load starter deck
-        this.setState({allDecks: JSON.parse(decksLocal)})
+        AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(decksLocal)) // load starter deck
+          .then(this.setState({allDecks: JSON.parse(decksLocal)}))
       }else {
         this.setState({allDecks: JSON.parse(value)})
       }
