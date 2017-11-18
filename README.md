@@ -4,9 +4,8 @@
 [![forthebadge](http://forthebadge.com/images/badges/built-by-developers.svg)](http://forthebadge.com)
 [![forthebadge](http://forthebadge.com/images/badges/built-for-android.svg)](http://forthebadge.com)
 
-This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
-Tis is app help users study by allow them create and save flash cards on their phones and sending a daily reminder notification
+This is app help users study by allow them create and save flash cards on their phones and sending a daily reminder notification
 
 ## Running the app
 Clone or Download this repository and  run `npm install`
@@ -26,9 +25,6 @@ npm start -- --reset-cache
 yarn start -- --reset-cache
 ```
 
-#### `npm test`
-
-Runs the [jest](https://github.com/facebook/jest) test runner on your tests.
 
 #### `npm run ios`
 
