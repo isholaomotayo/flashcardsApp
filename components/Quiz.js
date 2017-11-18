@@ -80,7 +80,7 @@ const incorrect =() => {
             onPress={() => {
               Alert.alert(
                 `Question :  ${activeQuiz[0] && activeQuiz[0].question}`,
-                `Answer :   ${activeQuiz[0] && activeQuiz[0].question} `,
+                `Answer :   ${activeQuiz[0] && activeQuiz[0].answer} `,
                 [
                   {text: 'Correct', onPress: () => correct()},
                   {text: 'Incorrect', onPress: () => incorrect()},
