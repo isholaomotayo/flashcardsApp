@@ -38,4 +38,3 @@ export const setNotification = () => (
 
 export const clearNotification = () => ( AsyncStorage.removeItem(NOTIFICATION_KEY)
   .then(Notifications.cancelAllScheduledNotificationsAsync))
-
