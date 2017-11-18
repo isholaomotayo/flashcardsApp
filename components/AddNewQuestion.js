@@ -27,9 +27,6 @@ export class AddNewQuestion extends React.Component {
           placeholder='Enter question ?  '
           value={question}
         />
-        {/*{console.log(screenProps['decks'][[deckName]])}*/}
-
-
         <TextInput
           style={{height: 40, width: 280, borderColor: tintColor}}
           onChangeText={(answer) => this.setState({answer})}
