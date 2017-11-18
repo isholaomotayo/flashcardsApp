@@ -7,6 +7,7 @@
 
 This is app help users study by allow them create and save flash cards on their phones and sending a daily reminder notification
 
+View at [https://exp.host/@isholaomotayo/flashcards](https://exp.host/@isholaomotayo/flashcards)
 ## Running the app
 Clone or Download this repository and  run `npm install`
 You Must have the node package manager installed for this to work
