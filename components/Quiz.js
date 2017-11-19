@@ -65,11 +65,24 @@ const incorrect =() => {
           <Text style={styles.heading}>{ deckName} Questions </Text>
           <Text style={{ fontSize : 17 , color: '#f3000f'}}> {activeQuiz.length > 0 ? ` ${activeQuiz.length} Questions Remaining ` :  ` Results`}</Text>
           { activeQuiz.length === 0 &&
-          <View  >
+          <View  style={styles.container}>
             <Text style={{ fontSize : 19 , color: '#000000', textAlign:'center'}}> You  Scored { (right / (right+wrong)) *100 } %</Text>
             <Text style={{ fontSize : 19 , color: '#f3003f' , textAlign:'center'}}>{wrong} answers were wrong</Text>
             <Text style={{ fontSize : 19 , color: '#000000', textAlign:'center'}}> and</Text>
-            <Text style={{ fontSize : 19 , color: '#f3003f' , textAlign:'center'}}> {right} answers were right</Text>
+            <Text style={{ fontSize : 19 , color: '#00f33f' , textAlign:'center'}}> {right} answers were right</Text>
+            <View style={{ display: 'flex', justifyContent: 'center', flexDirection: 'row'}}>
+            <TouchableOpacity
+              style={[styles.smallButton,{ height: 40, margin:10  }]}
+              onPress={() => navigation.navigate('Quiz', {deckName})}>
+
+              <Text style={styles.buttonText}> Go To Deck </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.smallButton, {height: 40, margin:10 }]}
+              onPress={() => this.setState({ activeQuiz: screenProps['decks'][[deckKey]]['questions']})}>
+              <Text style={styles.buttonText}> Restart Quiz </Text>
+            </TouchableOpacity>
+            </View>
           </View>}
 
 

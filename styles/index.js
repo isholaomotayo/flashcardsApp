@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
   smallButton: {
     marginBottom: 5,
     marginTop: 15,
-    width: 90,
+    width: 120,
     alignItems: 'center',
     backgroundColor: "#00af5f",
     borderRadius: 6
