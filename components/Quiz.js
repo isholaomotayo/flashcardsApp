@@ -83,18 +83,18 @@ export class Quiz extends React.Component {
             <View style={{display: 'flex', justifyContent: 'center', flexDirection: 'row'}}>
               <TouchableOpacity
                 style={[styles.smallButton, {height: 40, margin: 10}]}
-                onPress={() => navigation.navigate('SingleDeck', {aDeck : screenProps['decks'][[deckKey]]})}>
+                onPress={() => {navigation.navigate('SingleDeck', {aDeck : screenProps['decks'][[deckKey]]}),  this.setState({ right: 0 }), this.setState({ wrong: 0 }) }}  >
 
                 <Text style={styles.buttonText}> Go To Deck </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.smallButton, {height: 40, margin: 10}]}
-                onPress={() => this.setState({activeQuiz: screenProps['decks'][[deckKey]]['questions']})}>
+
+                onPress={() =>{ this.setState({activeQuiz: screenProps['decks'][[deckKey]]['questions']}),  this.setState({ right: 0 }), this.setState({ wrong: 0 }) } }>
                 <Text style={styles.buttonText}> Restart Quiz </Text>
               </TouchableOpacity>
             </View>
           </View>}
-
 
           <Text style={{fontSize: 20, margin: 10}}> {activeQuiz[0] && activeQuiz[0].question} </Text>
           {activeQuiz.length > 0 &&
