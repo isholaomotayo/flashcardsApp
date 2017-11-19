@@ -27,7 +27,6 @@ export class SingleDeck extends React.Component {
       Animated.timing(scale, {duration: 200, toValue: 1.04}),
       Animated.spring(scale, {toValue: 1, friction: 4})
     ]).start()
-
   }
   render() {
     const {navigation, screenProps} = this.props
@@ -40,8 +39,7 @@ export class SingleDeck extends React.Component {
           <MaterialCommunityIcons name='cards-outline' size={130} color={tintColor}/>
           <Text style={styles.heading}>  {currentDeck['title']} </Text>
           <Text> {aDeck.questions && currentDeck.questions.length} Cards </Text>
-
-
+          { currentDeck.questions === [] &&
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate('Quiz', {deckName: aDeck.title})}>
@@ -50,7 +48,7 @@ export class SingleDeck extends React.Component {
               Start Quiz </Text>
           </TouchableOpacity>
 
-
+          }
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate('AddNewQuestion', {deckName: aDeck.title})}>
