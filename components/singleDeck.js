@@ -39,7 +39,7 @@ export class SingleDeck extends React.Component {
           <MaterialCommunityIcons name='cards-outline' size={130} color={tintColor}/>
           <Text style={styles.heading}>  {currentDeck['title']} </Text>
           <Text> {aDeck.questions && currentDeck.questions.length} Cards </Text>
-          { currentDeck.questions === [] &&
+          { (aDeck.questions && currentDeck.questions.length !== 0 ) &&
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate('Quiz', {deckName: aDeck.title})}>
