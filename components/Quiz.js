@@ -87,7 +87,7 @@ export class Quiz extends React.Component {
             <View style={{display: 'flex', justifyContent: 'center', flexDirection: 'row'}}>
               <TouchableOpacity
                 style={[styles.smallButton, {height: 40, margin: 10}]}
-                onPress={() => navigation.navigate('Quiz', {deckName})}>
+                onPress={() => navigation.navigate('SingleDeck', {aDeck : screenProps['decks'][[deckKey]]})}>
 
                 <Text style={styles.buttonText}> Go To Deck </Text>
               </TouchableOpacity>
