@@ -55,7 +55,7 @@ export class Quiz extends React.Component {
       this.setState({activeQuiz: activeQuiz.slice(1)}) , this.setState({right: this.state.right + 1})
     }
     const incorrect = () => {
-      this.setState({activeQuiz: activeQuiz.slice(1)}) , this.setState({wrong: this.state.right + 1})
+      this.setState({activeQuiz: activeQuiz.slice(1)}) , this.setState({wrong: this.state.wrong + 1})
     }
 
     return (
