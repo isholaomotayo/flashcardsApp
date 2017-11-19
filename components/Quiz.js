@@ -71,17 +71,13 @@ export class Quiz extends React.Component {
           {activeQuiz.length === 0 &&
           <View style={styles.container}>
             {(right === 0 && wrong === 0 ) ?
-              <Text style={{fontSize: 19, color: '#000000', textAlign: 'center'}}> There are no cards in this deck
-                yet</Text>
+              <Text style={{fontSize: 19, color: '#000000', textAlign: 'center'}}> There are no cards in this deck yet</Text>
               :
-              <Text style={{fontSize: 19, color: '#000000', textAlign: 'center'}}> You
-                Scored {(right / (right + wrong)) * 100} %</Text>
+              <Text style={{fontSize: 19, color: '#000000', textAlign: 'center'}}> You Scored {(right / (right + wrong)) * 100} %</Text>
             }
-            {(right !== 0 && wrong !== 0 ) &&
-
-            < Text style={{fontSize: 19, color: '#f3003f', textAlign: 'center'}}>{wrong} answers were wrong</Text>}
-            {(right !== 0 && wrong !== 0 ) &&< Text style={{fontSize: 19, color: '#000000', textAlign: 'center'}}> and</Text>}
-            {(right !== 0 && wrong !== 0 ) &&  <Text style={{fontSize: 19, color: '#2a7e43', textAlign: 'center'}}> {right} answers were right</Text>}
+            {(right !== 0 || wrong !== 0 ) && <Text style={{fontSize: 19, color: '#f3003f', textAlign: 'center'}}>{wrong} answers were wrong</Text>}
+            {(right !== 0 || wrong !== 0 ) && <Text style={{fontSize: 19, color: '#000000', textAlign: 'center'}}> and</Text>}
+            {(right !== 0 || wrong !== 0 ) && <Text style={{fontSize: 19, color: '#2a7e43', textAlign: 'center'}}> {right} answers were right</Text>}
 
 
             <View style={{display: 'flex', justifyContent: 'center', flexDirection: 'row'}}>
