@@ -1,5 +1,15 @@
 {
   "expo": {
-    "sdkVersion": "22.0.0"
+    "name": "FlashCards",
+    "icon": "./assets/flashcards_icon_dark.png",
+    "version": "1.0.0",
+    "slug": "flashcards-quiz-app",
+    "sdkVersion": "22.0.0",
+    "ios": {
+      "bundleIdentifier": "pro.omotayo.flashcards"
+    },
+    "android": {
+      "package": "pro.omotayo.flashcards"
+    }
   }
 }
