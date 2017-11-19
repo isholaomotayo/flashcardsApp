@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "slug": "flashcards-quiz-app",
     "sdkVersion": "22.0.0",
+    "privacy": "public",
     "ios": {
       "bundleIdentifier": "pro.omotayo.flashcards"
     },
