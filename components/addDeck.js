@@ -32,7 +32,7 @@ export class AddADeck extends React.Component {
           />
 
         <TouchableOpacity
-          style={styles.button}
+          style={ deckName === "" ? styles.disabled: styles.button }
           disabled={deckName===""}
           onPress={() => {
             screenProps.addNewDeck(deckName), this.setState({deckName: ''}), navigation.navigate('SingleDeck', {

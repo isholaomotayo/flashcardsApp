@@ -72,7 +72,6 @@ export default class App extends React.Component {
   }
 }
 
-
 FlashStatusBar = ({backgroundColor, ...props}) => (
   <View style={{backgroundColor, height: Constants.statusBarHeight}}>
     <StatusBar translucent backgroundColor={backgroundColor} {...props} />
