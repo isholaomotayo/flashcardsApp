@@ -27,6 +27,15 @@ export const styles = StyleSheet.create({
     backgroundColor: tintColor,
     borderRadius: 6
   },
+
+  disabled: {
+    marginBottom: 15,
+    marginTop: 15,
+    width: 260,
+    alignItems: 'center',
+    backgroundColor: '#060e13',
+    borderRadius: 6
+  },
   smallButton: {
     marginBottom: 5,
     marginTop: 15,

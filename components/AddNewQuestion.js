@@ -35,8 +35,10 @@ export class AddNewQuestion extends React.Component {
           placeholder='Enter answer ?  '
           value={answer}
         />
+
         <TouchableOpacity
-          style={styles.button}
+          style={ answer ==="" || question === "" ? styles.disabled: styles.button }
+          disabled={ answer ==="" || question === ""}
           onPress={() => { const _question = { question, answer };  const _deckKey = deckName.replace(/\s+/g, '')
           screenProps.addNewCard(_question, _deckKey), this.setState({question: '', answer:''}), navigation.goBack()     }}>
           <Text style={styles.buttonText}>
