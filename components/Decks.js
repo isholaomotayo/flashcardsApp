@@ -36,8 +36,9 @@ export class Decks extends React.Component {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity   style={[ styles.button, { backgroundColor: '#cc0000'}]} onPress={ () => this.props.screenProps.deleteDeck(item.title)}>
-        <Text style={ styles.buttonText}> <MaterialIcons  name='delete' size={20} color='#ffffff'/> Delete deck </Text>
+      <TouchableOpacity style={[styles.button, {backgroundColor: '#cc0000', alignSelf: 'center'}]}
+                        onPress={() => this.props.screenProps.deleteDeck(item.title)}>
+        <Text style={styles.buttonText}> <MaterialIcons name='delete' size={20} color='#ffffff'/> Delete deck </Text>
       </TouchableOpacity>
     </View>
   )
@@ -45,16 +46,15 @@ export class Decks extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <FlatList
-          extraData={this.props.screenProps}
-          data={Object.values(Object.values(this.props.screenProps)[0])}
-          renderItem={this.renderItem}
-          keyExtractor={(item, index) => index}
-          ItemSeparatorComponent={this.renderSeparator}
-        />
+      <FlatList
+        extraData={this.props.screenProps}
+        data={Object.values(Object.values(this.props.screenProps)[0])}
+        renderItem={this.renderItem}
+        keyExtractor={(item, index) => index}
+        ItemSeparatorComponent={this.renderSeparator}
+      />
 
-      </View>
+
     )
   }
 }
