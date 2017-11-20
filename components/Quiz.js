@@ -129,6 +129,8 @@ export class Quiz extends React.Component {
               onPress={() => incorrect()}>
               <Text style={styles.buttonText}> Incorrect </Text>
             </TouchableOpacity>
+
+
           </View>}
         </View>
       </Animated.View>

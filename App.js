@@ -33,6 +33,12 @@ export default class App extends React.Component {
     this.setState({allDecks: _deck}),
       AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(_deck))
   }
+deleteDeck = ( deckName ) => {
+    let copy = Object.assign({}, this.state.allDecks)
+delete copy[[ deckName.replace(/\s+/g, '')]]
+ AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(copy))
+    .then(this.setState({ allDecks: copy}))
+}
 
   addNewCard = ( question , deckKey) => {
 
@@ -43,7 +49,8 @@ export default class App extends React.Component {
         ['questions']: [...this.state.allDecks[deckKey]['questions'], question]
       }
     }
-    this.setState({allDecks: _card}), AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(_card))
+    this.setState({allDecks: _card})
+    AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(_card))
   }
 
   componentDidMount() {
@@ -65,7 +72,7 @@ export default class App extends React.Component {
     return (
       <Animated.View style={{flex: 1, opacity: this.state.opacity}}>
         <FlashStatusBar backgroundColor={blue} barStyle="light-content"/>
-        <Stack screenProps={{decks: this.state.allDecks, addNewDeck: this.addNewDeck, addNewCard: this.addNewCard}}/>
+        <Stack screenProps={{decks: this.state.allDecks, addNewDeck: this.addNewDeck, addNewCard: this.addNewCard, deleteDeck: this.deleteDeck }}/>
       </Animated.View>
 
     );

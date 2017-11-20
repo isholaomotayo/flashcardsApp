@@ -11,6 +11,9 @@
     },
     "android": {
       "package": "pro.omotayo.flashcards"
-    }
+    },
+    "notification": {
+      "icon": "./assets/flashcards_icon_dark.png"
+}
   }
 }

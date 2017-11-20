@@ -44,6 +44,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#00af5f",
     borderRadius: 6
   },
+
   buttonText: {
     padding: 10,
     color: 'white'
