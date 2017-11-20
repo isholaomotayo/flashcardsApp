@@ -12,6 +12,20 @@ import {blue, tintColor, styles} from "../styles"
 export class Decks extends React.Component {
   showMe = (aDeck) => this.props.navigation.navigate('SingleDeck', {aDeck})
 
+  renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "90%",
+          backgroundColor: "#13283c",
+          alignSelf: "center"
+        }}
+      />
+    );
+  };
+
+
   renderItem = ({item}) => (
     <View>
       <TouchableOpacity onPress={() => this.showMe(item)}>
@@ -37,6 +51,7 @@ export class Decks extends React.Component {
           data={Object.values(Object.values(this.props.screenProps)[0])}
           renderItem={this.renderItem}
           keyExtractor={(item, index) => index}
+          ItemSeparatorComponent={this.renderSeparator}
         />
 
       </View>
